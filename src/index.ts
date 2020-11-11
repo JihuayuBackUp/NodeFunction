@@ -7,7 +7,10 @@ import {MongoClient} from 'mongodb'
 
 config();
 process.nextTick(async () => {
-    const db = await MongoClient.connect(process.env.MONGO)
+    let db = undefined;
+    if (process.env.MONGO) {
+        db = await MongoClient.connect(process.env.MONGO)
+    }
     let functions = new Map<string, RequestListener>();
     await reload();
 

@@ -33,6 +33,7 @@ process.nextTick(async () => {
                     }
                 }
             } catch (e) {
+                console.log(e)
                 res.writeHead(500, {'Content-Type': 'text/plain'});
                 res.end('Error!\n');
             }

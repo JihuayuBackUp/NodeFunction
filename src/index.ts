@@ -20,13 +20,13 @@ process.nextTick(async () => {
             let fn = functions.get(key);
             try {
                 if (fn) {
-                    return fn.call({db: db, req: req, res: res});
+                    return fn.call({self:this,db: db, req: req, res: res});
                 } else {
                     if (existsSync(join(process.env.FUNCTION_DIR, url.pathname + ".js"))) {
                         const fnStr = readFileSync(join(process.env.FUNCTION_DIR, url.pathname + ".js"), {encoding: "utf8"});
                         const fn = new Function('req', 'res', fnStr) as RequestListener;
                         functions.set(key, fn);
-                        return fn.call({db: db, req: req, res: res});
+                        return fn.call({self:this,db: db, req: req, res: res});
                     } else {
                         res.writeHead(404, {'Content-Type': 'text/plain'});
                         res.end('No Found!\n');

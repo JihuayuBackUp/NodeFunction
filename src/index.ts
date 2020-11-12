@@ -4,7 +4,7 @@ import {walk} from 'walk'
 import {relative, join} from 'path'
 import {readFileSync, existsSync} from "fs";
 import {MongoClient} from 'mongodb'
-const{ execSync } = self.require('child_process');
+const{ execSync } = require('child_process');
 
 config();
 process.nextTick(async () => {
